@@ -1,0 +1,24 @@
+{
+	"$schema": "../../../node_modules/db-conn/schema/table.json",
+	"name":"Journal",	
+	"description":"Journal Entry",
+	"columns": [
+		{
+			"name":"id",
+			"type":"number"
+		},
+		{
+			"name":"memo",
+			"type":"string",
+			"size": 64
+		},
+		{
+			"name":"postDate",
+			"type":"datetime"
+		},
+		{
+			"name":"balanceAmount",
+			"type":"decimal"
+		}		
+	]
+}

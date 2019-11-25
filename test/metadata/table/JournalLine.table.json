@@ -1,0 +1,27 @@
+{
+	"$schema": "../../../node_modules/db-conn/schema/table.json",
+	"name":"JournalLine",	
+	"description":"Journal Entry Lines",
+	"columns": [
+		{
+			"name":"id",
+			"type":"number"
+		},
+		{
+			"name":"lineNum",
+			"type":"number"		
+		},
+		{
+			"name":"account",
+			"type":"number"
+		},
+		{
+			"name":"credit",
+			"type":"decimal"
+		},
+		{
+			"name":"debit",
+			"type":"decimal"
+		}		
+	]
+}

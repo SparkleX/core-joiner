@@ -1,0 +1,27 @@
+{
+	"$schema": "../../../node_modules/db-conn/schema/table.json",
+	"name":"JournalCashflow",	
+	"description":"Cashflow for Journal Entry Lines",
+	"columns": [
+		{
+			"name":"id",
+			"type":"number"
+		},
+		{
+			"name":"lineNum",
+			"type":"number"		
+		},
+		{
+			"name":"cfLineNum",
+			"type":"number"
+		},
+		{
+			"name":"cfId",
+			"type":"number"
+		},
+		{
+			"name":"amount",
+			"type":"decimal"
+		}		
+	]
+}

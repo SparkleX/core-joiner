@@ -1,0 +1,52 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 20
+		},
+		"description": {
+			"type": "string"
+		},
+		"tables": {
+			"type": "object"
+		},
+		"joins": {
+			"$ref": "#/definitions/joins"
+		}
+	},
+	"additionalProperties": false,
+	"definitions": {
+		"joins": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"$ref": "#/definitions/join"
+			}
+		},
+		"join": {
+			"type": "object",
+			"required": [
+				"left",
+				"right",
+				"on"
+			],
+			"properties": {
+				"left": {
+					"type": "string"
+				},
+				"right": {
+					"type": "string"
+				},
+				"on": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false
+		}
+	}
+}

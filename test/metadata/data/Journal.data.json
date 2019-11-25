@@ -1,0 +1,26 @@
+[
+	{
+		"id": "1",
+		"memo": "JE1",
+		"postDate": "2002-01-01",
+		"balanceAmount" : 100.00
+	},
+	{
+		"id": "2",
+		"memo": "JE2",
+		"postDate": "2002-01-02",
+		"balanceAmount" : 200.00
+	},
+	{
+		"id": "3",
+		"memo": "JE3",
+		"postDate": "2002-01-03",
+		"balanceAmount" : 300.03
+	},
+	{
+		"id": "4",
+		"memo": "JE4",
+		"postDate": "2002-01-04",
+		"balanceAmount" : 400.03
+	}
+]

@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../schema/semantic.json",
+	"name": "Journal",
+	"description": "Journal",
+	"foundation": "Accounting.foundation",
+	"columns": [
+		{
+			"tableAlias": "id",
+			"column": "id"
+		},
+		{
+			"tableAlias": "id",
+			"column": "id",
+			"aggression": "sum"
+		}
+	]
+}

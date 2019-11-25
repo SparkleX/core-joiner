@@ -1,0 +1,31 @@
+[
+	{
+		"id": "1",
+		"lineNum": "1",
+		"account": "2002-01-01",
+		"credit" : 100.00,
+		"decimal" : null
+	},
+	{
+		"id": "2",
+		"lineNum": "1",
+		"account": "2002-01-01",
+		"credit" : 100.00,
+		"decimal" : null
+	},
+	{
+		"id": "3",
+		"lineNum": "1",
+		"account": "2002-01-01",
+		"credit" : 100.00,
+		"decimal" : null
+	},
+	{
+		"id": "3",
+		"lineNum": "1",
+		"account": "2002-01-01",
+		"credit" : 100.00,
+		"decimal" : null
+	}
+]
+

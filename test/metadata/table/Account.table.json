@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../node_modules/db-conn/schema/table.json",
+	"name":"Account",	
+	"description":"Account",
+	"columns": [
+		{
+			"name":"id",
+			"type":"number"
+		},
+		{
+			"name":"code",
+			"type":"string"		
+		},
+		{
+			"name":"description",
+			"type":"string"		
+		}
+	]
+}
