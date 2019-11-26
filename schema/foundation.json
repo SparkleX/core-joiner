@@ -13,7 +13,7 @@
 			"type": "string"
 		},
 		"tables": {
-			"type": "object"
+			"$ref": "#/definitions/tables"
 		},
 		"joins": {
 			"$ref": "#/definitions/joins"
@@ -45,6 +45,27 @@
 				"on": {
 					"type": "string"
 				}
+			},
+			"additionalProperties": false
+		},
+		"tables": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"$ref": "#/definitions/table"
+			},
+			"additionalProperties": false
+		},		
+		"table": {
+			"type": "object",
+			"required": [
+				"table",
+				"description"
+			],
+			"properties": {
+				"alias": "string",
+				"table": "string",
+				"description":"string"
 			},
 			"additionalProperties": false
 		}

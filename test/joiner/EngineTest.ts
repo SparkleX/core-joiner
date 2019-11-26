@@ -1,4 +1,4 @@
-import { JoinEngine } from "../../src/index"
+import { JoinEngine, QueryEngine, DataJoinEngine } from "../../src/index"
 
 import { describe,it } from "mocha"
 import * as chai from 'chai'
@@ -29,11 +29,16 @@ describe(__filename, () => {
 				await conn.execute(sql, param);
 			}
 		}		
-
+		//var list = await conn.executeQuery(`select t0.id from Journal t0 inner join JournalLine t1 on t0.id = t1.id`);
+		//console.dir(list);
 		var semanticView:SemanticView = await JoinEngine.load("./test/metadata/semantic/Journal.semantic.json");
 		var joinEngine:JoinEngine = new JoinEngine();
-		var list = await joinEngine.executeQuery(semanticView, ["id","lineNum"]);
-		console.dir(list);
+		var [sqls, tables] = joinEngine.executeQuery(semanticView, ["Journal.id","JournalLine.id"]);
+		var queryEngine:QueryEngine = new QueryEngine();
+		var listOfData:object[][] = await queryEngine.execute(conn, sqls);
 
+		var dataJoinEngine = new DataJoinEngine();
+		var result = dataJoinEngine.joinAll(listOfData, tables,semanticView.foundationObject);
+		console.dir(JSON.stringify(result));
     });
 });

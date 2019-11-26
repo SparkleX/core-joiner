@@ -2,16 +2,14 @@
 	"$schema": "../../../schema/semantic.json",
 	"name": "Journal",
 	"description": "Journal",
-	"foundation": "Accounting.foundation",
-	"columns": [
-		{
-			"tableAlias": "id",
-			"column": "id"
+	"foundation": "test/metadata/foundation/Accounting.foundation.json",
+	"columns": {
+		"Journal.id":{
+			"description": "Journal ID"
 		},
-		{
-			"tableAlias": "id",
-			"column": "id",
+		"JournalLine.id":{
+			"description": "JournalLine ID",
 			"aggression": "sum"
 		}
-	]
+	}	
 }

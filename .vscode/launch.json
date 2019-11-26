@@ -7,7 +7,7 @@
 			"request": "launch",
 			"program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
 			"cwd": "${workspaceFolder}",
-			"args": ["-r", "ts-node/register", "${workspaceFolder}/test/metadata/SqlJsDdlBuilderTest.ts"],
+			"args": ["-r", "ts-node/register", "${workspaceFolder}/test/joiner/EngineTest.ts"],
 			"protocol": "inspector"
 		}
 	]

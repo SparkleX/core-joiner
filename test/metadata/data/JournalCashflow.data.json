@@ -1,13 +1,13 @@
 [
 	{
-		"id": "1",
+		"id": 1,
 		"lineNum": "1",
 		"cfLineNum": "1",
 		"cfId" : 100.00,
 		"amount": 50
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"lineNum": "1",
 		"cfLineNum": "1",
 		"cfId" : 100.00,

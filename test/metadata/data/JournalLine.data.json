@@ -1,28 +1,28 @@
 [
 	{
-		"id": "1",
-		"lineNum": "1",
+		"id": 1,
+		"lineNum": 1,
 		"account": "2002-01-01",
 		"credit" : 100.00,
 		"decimal" : null
 	},
 	{
-		"id": "2",
-		"lineNum": "1",
+		"id": 2,
+		"lineNum": 1,
 		"account": "2002-01-01",
 		"credit" : 100.00,
 		"decimal" : null
 	},
 	{
-		"id": "3",
-		"lineNum": "1",
+		"id": 2,
+		"lineNum": 2,
 		"account": "2002-01-01",
 		"credit" : 100.00,
 		"decimal" : null
 	},
 	{
-		"id": "3",
-		"lineNum": "1",
+		"id": 2,
+		"lineNum": 3,
 		"account": "2002-01-01",
 		"credit" : 100.00,
 		"decimal" : null

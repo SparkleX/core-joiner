@@ -1,16 +1,16 @@
 [
 	{
-		"id": "1",
+		"id": 1,
 		"code": "F1",
 		"description": "Flow 1"
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"code": "F2",
 		"description": "Flow 2"
 	},
 	{
-		"id": "3",
+		"id": 3,
 		"code": "F3",
 		"description": "Flow 3"
 	}

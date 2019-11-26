@@ -1,16 +1,16 @@
 [
 	{
-		"id": "1",
+		"id": 1,
 		"code": "A00001",
 		"description": "Cash"
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"code": "A00002",
 		"description": "Bank Deposit"
 	},
 	{
-		"id": "3",
+		"id": 3,
 		"code": "A00003",
 		"description": "Tax Payable"
 	}

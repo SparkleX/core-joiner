@@ -22,20 +22,16 @@
 	"additionalProperties": false,
     "definitions": {
         "columns":{
-			"type": "array",
-			"minItems": 1,
-			"items": {
+			"type": "object",
+			"additionalProperties": 
+			{ 
 				"$ref": "#/definitions/column"
 			}
 		},
 		"column":{
 			"type": "object",
-			"required": ["tableAlias", "column"],
 			"properties": {
-				"tableAlias": {"type": "string"},
-				"column": {
-					"type": "string"					
-				},
+				"description":"string",
 				"aggression": {
 					"type": "string",
 					"enum": ["sum", "max", "min", "avg"]
