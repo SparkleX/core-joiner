@@ -1,7 +1,7 @@
-import { Foundation } from "./metadata/foundation/Foundation";
-import { Table } from "./metadata/foundation/Table";
-import { FoundationUtil } from "./metadata/FoundationUtil";
-import { Join } from "./metadata/foundation/Join";
+import { Foundation } from "./foundation/Foundation";
+import { Table } from "./foundation/Table";
+import { FoundationUtil } from "./FoundationUtil";
+import { Join } from "./foundation/Join";
 export class DataJoinEngine {
 	public joinAll(data: object[][], tables:Table[], foundation:Foundation):object[] {
 		var left:object[] = data[0];

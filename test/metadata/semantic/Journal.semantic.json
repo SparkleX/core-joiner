@@ -5,11 +5,27 @@
 	"foundation": "test/metadata/foundation/Accounting.foundation.json",
 	"columns": {
 		"Journal.id":{
+			"type":"dimension",
 			"description": "Journal ID"
 		},
-		"JournalLine.id":{
-			"description": "JournalLine ID",
+		"Journal.balance":{
+			"type":"measure",
+			"description": "Journal ID",
 			"aggression": "sum"
-		}
+		},		
+		"JournalLine.id":{
+			"type":"dimension",
+			"description": "JournalLine ID"
+		},
+		"JournalLine.credit":{
+			"type":"measure",
+			"description": "Credit Amount",
+			"aggression": "sum"
+		},		
+		"JournalLine.debit":{
+			"type":"measure",
+			"description": "Debit Amount",
+			"aggression": "sum"
+		}	
 	}	
 }

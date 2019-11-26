@@ -1,19 +1,15 @@
-import { SemanticView } from "./metadata/semantic/SemanticView";
-import * as fs from "fs";
-import { Table } from "./metadata/foundation/Table";
-import { Column } from "./metadata/semantic/Column";
-import { FoundationUtil } from "./metadata/FoundationUtil";
+import { SemanticView } from "./semantic/SemanticView";
+
+import { Table } from "./foundation/Table";
+import { Column } from "./semantic/Column";
+import { FoundationUtil } from "./FoundationUtil";
+import { SemanticUtil } from "./SemanticUtil";
+import { ColumnType } from "./semantic/ColumnType";
 
 
 export class JoinEngine {
 
-	public static async load(file:string):Promise<SemanticView> {
-		let rawdata = fs.readFileSync(file).toString();
-		var semanticObject:SemanticView = JSON.parse(rawdata);
-		Object.setPrototypeOf(semanticObject, SemanticView.prototype);
-		semanticObject.init();
-		return semanticObject;
-	}
+
 
 	public executeQuery(semanticView:SemanticView,columns: string[] ):[string[], Table[]] {
 		var sqls:string[] = [];
@@ -37,7 +33,12 @@ export class JoinEngine {
 			if(tableAlias!=alias) {
 				continue;
 			}
-			sql = sql + `${column},`;
+			var col:Column = SemanticUtil.getColumnByAlias(semanticView, column);
+			if(col.type==ColumnType.measure) {
+				sql = sql + `sum(${column}),`;
+			}else {
+				sql = sql + `${column},`;
+			}
 		}
 		sql = sql.substr(0, sql.length-1);
 		return sql;
@@ -47,13 +48,13 @@ export class JoinEngine {
 		var set:any = {};
 		var sequence:Table[] = [];
 		for(let column of columns) {
-			if(set[column]===undefined) {
-				//var col:Column = semanticView.columns[column];
-				var tableAlias = column.split(".")[0];
-				var table = FoundationUtil.getByAlias(semanticView.foundationObject, tableAlias);
-				set[column] = true;
-				sequence.push(table);
-			}			
+			var tableAlias = column.split(".")[0];
+			if(set[tableAlias]!==undefined) {
+				continue;
+			}
+			set[tableAlias] = true;
+			var table = FoundationUtil.getByAlias(semanticView.foundationObject, tableAlias);				
+			sequence.push(table);
 		}
 		return sequence;
 	}

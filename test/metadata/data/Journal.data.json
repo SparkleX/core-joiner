@@ -3,12 +3,12 @@
 		"id": 1,
 		"memo": "JE1",
 		"postDate": "2002-01-01",
-		"balanceAmount" : 100.00
+		"balance" : 100.00
 	},
 	{
 		"id": 2,
 		"memo": "JE2",
 		"postDate": "2002-01-02",
-		"balanceAmount" : 200.00
+		"balance" : 200.00
 	}
 ]

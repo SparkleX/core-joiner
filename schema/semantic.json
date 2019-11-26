@@ -30,7 +30,12 @@
 		},
 		"column":{
 			"type": "object",
+			"required": ["type","description"],
 			"properties": {
+				"type":{
+					"type": "string",
+					"enum": ["dimension", "measure"]
+				},
 				"description":"string",
 				"aggression": {
 					"type": "string",

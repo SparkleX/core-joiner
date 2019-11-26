@@ -5,7 +5,6 @@ import * as chai from 'chai'
 import * as fs from 'fs'
 import { SqlJsConnection, SqlJsDdlBuilder, initSqlJs} from "db-conn-sqljs"
 import { Connection, DdlBuilder, MdTable, Metadata} from "db-conn"
-import { SemanticView } from './../../src/metadata/semantic/SemanticView';
 
 describe(__filename, () => {
 	
@@ -31,14 +30,17 @@ describe(__filename, () => {
 		}		
 		//var list = await conn.executeQuery(`select t0.id from Journal t0 inner join JournalLine t1 on t0.id = t1.id`);
 		//console.dir(list);
-		var semanticView:SemanticView = await JoinEngine.load("./test/metadata/semantic/Journal.semantic.json");
-		var joinEngine:JoinEngine = new JoinEngine();
-		var [sqls, tables] = joinEngine.executeQuery(semanticView, ["Journal.id","JournalLine.id"]);
-		var queryEngine:QueryEngine = new QueryEngine();
-		var listOfData:object[][] = await queryEngine.execute(conn, sqls);
-
-		var dataJoinEngine = new DataJoinEngine();
-		var result = dataJoinEngine.joinAll(listOfData, tables,semanticView.foundationObject);
+		var engine = new QueryEngine();
+		var semantic = "./test/metadata/semantic/Journal.semantic.json";
+		var columns = ["Journal.id","JournalLine.id","Journal.balance","JournalLine.credit","JournalLine.debit"];
+		var result = await engine.query(conn, semantic, columns);
 		console.dir(JSON.stringify(result));
+
+		columns = ["Journal.balance"]
+		result = await engine.query(conn, semantic, columns);
+		console.dir(result);
+		columns = ["Journal.id", "JournalLine.credit","JournalLine.debit"];
+		result = await engine.query(conn, semantic, columns);
+		console.dir(result);		
     });
 });

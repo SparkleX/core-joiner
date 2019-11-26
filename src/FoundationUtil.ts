@@ -2,6 +2,7 @@ import { Foundation } from "./foundation/Foundation";
 import { Table } from "./foundation/Table";
 import { Join } from "./foundation/Join";
 
+
 export class FoundationUtil {
 	public static init(foundation:Foundation):void {
 		foundation.tablesMapByAlias = {};

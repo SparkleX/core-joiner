@@ -9,11 +9,7 @@ export class SemanticView {
 	public foundation: string;
 	public foundationObject:Foundation;
 	public columns:Columns;//{ [key: string]: Column };
-	public  async init():Promise<void> {
-		var rawdata = fs.readFileSync(this.foundation).toString();
-		this.foundationObject = JSON.parse(rawdata);
-		FoundationUtil.init(this.foundationObject);
-	}
+
 
 
 }
