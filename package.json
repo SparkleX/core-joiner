@@ -16,7 +16,8 @@
 	"dependencies": {
 		"db-conn": "^0.0.3",
 		"eval": "^0.1.4",
-		"sql.js": "^1.0.1"
+		"sql.js": "^1.0.1",
+		"string.prototype.matchall": "^4.0.0"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.2.4",

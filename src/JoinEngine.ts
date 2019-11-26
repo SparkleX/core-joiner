@@ -2,7 +2,7 @@ import { Foundation } from "./foundation/Foundation";
 import { Table } from "./foundation/Table";
 import { FoundationUtil } from "./FoundationUtil";
 import { Join } from "./foundation/Join";
-export class DataJoinEngine {
+export class JoinEngine {
 	public joinAll(data: object[][], tables:Table[], foundation:Foundation):object[] {
 		var left:object[] = data[0];
 		for(var i =1;i<data.length;i++) {

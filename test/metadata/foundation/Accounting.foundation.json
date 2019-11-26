@@ -34,11 +34,6 @@
 			"left":"Journal",
 			"right":"JournalLine",
 			"on":"Journal.id = JournalLine.id"
-		},
-		{
-			"left":"",
-			"right":"",
-			"on":""
 		}
 	]
 }

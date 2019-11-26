@@ -1,4 +1,4 @@
-import { JoinEngine, QueryEngine, DataJoinEngine } from "../../src/index"
+import { QueryEngine } from "../../src/index"
 
 import { describe,it } from "mocha"
 import * as chai from 'chai'
@@ -28,19 +28,23 @@ describe(__filename, () => {
 				await conn.execute(sql, param);
 			}
 		}		
-		//var list = await conn.executeQuery(`select t0.id from Journal t0 inner join JournalLine t1 on t0.id = t1.id`);
+		//var list = await conn.executeQuery(`select sum(JournalLine.credit) as "JournalLine.credit",sum(JournalLine.debit) as "JournalLine.debit",JournalLine.id as "JournalLine.id" from JournalLine as JournalLine group by JournalLine.id`);
 		//console.dir(list);
 		var engine = new QueryEngine();
 		var semantic = "./test/metadata/semantic/Journal.semantic.json";
-		var columns = ["Journal.id","JournalLine.id","Journal.balance","JournalLine.credit","JournalLine.debit"];
-		var result = await engine.query(conn, semantic, columns);
+		var columns;
+		var result;
+		/*columns = ["Journal.id","JournalLine.id","Journal.balance","JournalLine.credit","JournalLine.debit"];
+		result = await engine.query(conn, semantic, columns);
 		console.dir(JSON.stringify(result));
 
 		columns = ["Journal.balance"]
 		result = await engine.query(conn, semantic, columns);
-		console.dir(result);
+		console.dir(result);*/
+
 		columns = ["Journal.id", "JournalLine.credit","JournalLine.debit"];
 		result = await engine.query(conn, semantic, columns);
-		console.dir(result);		
+		console.dir(JSON.stringify(result));
+		console.dir(result);
     });
 });
