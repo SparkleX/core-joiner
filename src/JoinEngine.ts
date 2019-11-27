@@ -24,26 +24,6 @@ export class JoinEngine {
 				}
 			}
 		}
-		/*var leftIndex = 0;
-		var rightIndex = 0;
-		for(;;) {
-			if (this.isJoined(dataLeft[leftIndex], dataRight[rightIndex], join)) {				
-				if((dataLeft[leftIndex] as any)["_array"] ===undefined ) {
-					(dataLeft[leftIndex] as any)["_array"] = [];
-				}
-				(dataLeft[leftIndex] as any)["_array"].push(dataRight[rightIndex]);
-				rightIndex++;
-			}
-			else {
-				leftIndex++;
-			}
-			if(leftIndex>=dataLeft.length) {
-				break;
-			}
-			if(rightIndex>=dataRight.length) {
-				break;
-			}
-		}*/
 		return dataLeft;
 	}
 	private isJoined(left: object, right: object, join: Join):boolean {

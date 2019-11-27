@@ -30,6 +30,10 @@
 			"type":"measure",
 			"description": "Debit Amount",
 			"aggression": "sum"
-		}	
+		},
+		"Account.code":{
+			"type":"dimension",
+			"description": "Account Code"
+		}
 	}	
 }

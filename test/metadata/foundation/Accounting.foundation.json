@@ -34,6 +34,11 @@
 			"left":"Journal",
 			"right":"JournalLine",
 			"on":"Journal.id = JournalLine.id"
-		}
+		},
+		{
+			"left":"JournalLine",
+			"right":"Account",
+			"on":"JournalLine.account = Account.id"
+		}		
 	]
 }

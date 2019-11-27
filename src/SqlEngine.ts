@@ -15,15 +15,12 @@ export class SqlEngine {
 		var sqls:string[] = [];
 		var tables = this.expandSequence(semanticView, columns);
 		for(var to = 0;to<tables.length;to++) {
-			var sqlSelect = this.buildSqlSelect(semanticView, columns, tables, to);
-			var sqlJoin = this.buildSqlFromWithJoin(semanticView, tables, to);
-
 			var allCols = this.getSelectColumns(semanticView, columns, tables, to);
+			var sqlSelect = this.buildSqlSelect(semanticView, allCols);
+			var sqlJoin = this.buildSqlFromWithJoin(semanticView, tables, to);
 			var dimCols = this.getDimColumns(semanticView, allCols);
-
 			var sqlGroupBy = this.sqlGroupBy(dimCols);
 			var sql = sqlSelect + ' ' + sqlJoin + ' ' + sqlGroupBy;
-			//console.dir(sql);
 			sqls.push(sql);
 		}
 		
@@ -84,42 +81,19 @@ export class SqlEngine {
 		}
 		return cols;		
 	}
-	private buildSqlSelect(semanticView: SemanticView, columns: string[], tables: Table[], to: number) {
+	private buildSqlSelect(semanticView: SemanticView, cols: string[]) {
 		var sql = "select ";
-		var tableAlias = tables[to].alias;
-		var usedColumn:any = {};
-		for(let column of columns) {
-			var alias = column.split(".")[0];
-			var fieldName = column.split(".")[1];
-			if(tableAlias!=alias) {
-				continue;
-			}
-			usedColumn[column] = true;
-			var col:Column = SemanticUtil.getColumnByAlias(semanticView, column);
+		for(let colName of cols) {
+			var fieldName = colName.split(".")[1];
+
+			var col:Column = SemanticUtil.getColumnByAlias(semanticView, colName);
 			if(col.type==ColumnType.measure) {
-				sql = sql + `sum(${column}) as "${fieldName}",`;
+				sql = sql + `sum(${colName}) as "${fieldName}",`;
 			}else {
-				sql = sql + `${column} as "${fieldName}",`;
+				sql = sql + `${colName} as "${fieldName}",`;
 			}
-		}		
-		if(tables.length-1>to) {
-			var joinCols:string[] = this.getJoinedColumn(semanticView, tables[to], tables[to+1]);
-			for(let column of joinCols) {
-				if(usedColumn[column]===undefined) {
-					var fieldName = column.split(".")[1];
-					sql = sql + `${column} as "${fieldName}",`;
-				}
-			}			
 		}
-		if(to>0) {
-			var joinCols:string[] = this.getJoinedColumn(semanticView,  tables[to], tables[to-1]);
-			for(let column of joinCols) {
-				if(usedColumn[column]===undefined) {
-					var fieldName = column.split(".")[1];
-					sql = sql + `${column} as "${fieldName}",`;
-				}
-			}			
-		}		
+		
 		sql = sql.substr(0, sql.length-1);
 		return sql;
 	}

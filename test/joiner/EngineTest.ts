@@ -81,5 +81,11 @@ describe(__filename, () => {
 		chai.expect(result).to.eqls([ 
 			{ credit: 300, debit: 300 } 
 		]);
-    });	
+	});	
+	/*it.only("join jump 1,Account", async function() {
+		var columns = ["Journal.id", "Account.code"];
+		var result = await engine.query(conn, semantic, columns);
+		console.debug(JSON.stringify(result));
+		chai.expect(result).to.eqls([]);
+	});	*/	
 });
