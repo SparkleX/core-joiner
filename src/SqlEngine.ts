@@ -31,11 +31,14 @@ export class SqlEngine {
 		
 	}
 	sqlGroupBy(dimCols: string[]) {
+		if(dimCols.length == 0) {
+			return "";
+		}
 		var sql:string="";
 		for(let col of dimCols) {
-			sql+= col;
+			sql+= (col+",");
 		}
-
+		sql = sql.substr(0, sql.length-1);
 		return "group by " + sql;
 
 	}

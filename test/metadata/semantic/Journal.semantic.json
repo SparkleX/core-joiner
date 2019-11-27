@@ -17,6 +17,10 @@
 			"type":"dimension",
 			"description": "JournalLine ID"
 		},
+		"JournalLine.lineNum":{
+			"type":"dimension",
+			"description": "JournalLine ID"
+		},		
 		"JournalLine.credit":{
 			"type":"measure",
 			"description": "Credit Amount",

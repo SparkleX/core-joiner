@@ -7,11 +7,12 @@ import { SqlJsConnection, SqlJsDdlBuilder, initSqlJs} from "db-conn-sqljs"
 import { Connection, DdlBuilder, MdTable, Metadata} from "db-conn"
 
 describe(__filename, () => {
-	
-    it("test", async () => {
-
+	var conn:SqlJsConnection;
+	var engine:QueryEngine;
+	var semantic:string;
+	before(async function() {
 		var SQL = await initSqlJs();
-		var conn:Connection = new SqlJsConnection();
+		conn = new SqlJsConnection();
 		conn.open(SQL);
 		var mdTables:MdTable[] = (await Metadata.loadAll("test/metadata/table/")).tables;
 		var ddlBuilder:DdlBuilder = new SqlJsDdlBuilder();
@@ -27,24 +28,58 @@ describe(__filename, () => {
 			for(let param of paramsArray) {
 				await conn.execute(sql, param);
 			}
-		}		
-		//var list = await conn.executeQuery(`select sum(JournalLine.credit) as "JournalLine.credit",sum(JournalLine.debit) as "JournalLine.debit",JournalLine.id as "JournalLine.id" from JournalLine as JournalLine group by JournalLine.id`);
-		//console.dir(list);
-		var engine = new QueryEngine();
-		var semantic = "./test/metadata/semantic/Journal.semantic.json";
-		var columns;
-		var result;
-		/*columns = ["Journal.id","JournalLine.id","Journal.balance","JournalLine.credit","JournalLine.debit"];
-		result = await engine.query(conn, semantic, columns);
-		console.dir(JSON.stringify(result));
-
-		columns = ["Journal.balance"]
-		result = await engine.query(conn, semantic, columns);
-		console.dir(result);*/
-
-		columns = ["Journal.id", "JournalLine.credit","JournalLine.debit"];
-		result = await engine.query(conn, semantic, columns);
-		console.dir(JSON.stringify(result));
-		console.dir(result);
-    });
+		}
+		engine = new QueryEngine();
+		semantic = "./test/metadata/semantic/Journal.semantic.json";		
+	});
+	it("join 1,2", async function() {
+		var columns = ["Journal.id","Journal.balance","JournalLine.id", "JournalLine.lineNum", "JournalLine.credit","JournalLine.debit"];
+		var result = await engine.query(conn, semantic, columns);
+		chai.expect(result).to.eqls([
+			{
+				"id":1,
+				"balance":100,
+				"_array":
+				[
+					{"id":1,"lineNum":1,"credit":100,"debit":null},
+					{"id":1,"lineNum":2,"credit":null,"debit":100}
+				]
+			},
+			{
+				"id":2,
+				"balance":200,
+				"_array":
+				[
+					{"id":2,"lineNum":1,"credit":200,"debit":null},
+					{"id":2,"lineNum":2,"credit":null,"debit":200}
+				]
+			}
+		]);
+	});
+	it("join 2,1", async function() {
+		var columns = ["JournalLine.id", "JournalLine.lineNum", "Journal.id"];
+		var result = await engine.query(conn, semantic, columns);
+		//console.debug(JSON.stringify(result));
+		chai.expect(result).to.eqls([{"id":1,"lineNum":1,"_array":[{"id":1}]},{"id":1,"lineNum":2,"_array":[{"id":1}]},{"id":2,"lineNum":1,"_array":[{"id":2}]},{"id":2,"lineNum":2,"_array":[{"id":2}]}]);
+	});	
+	it("sum 1", async function() {
+		var columns = ["Journal.balance"];
+		var result = await engine.query(conn, semantic, columns);
+		chai.expect(result).to.eqls([ { balance: 300 } ]);		
+	});
+    it("sum 1,2", async () => {
+		var columns = ["Journal.id", "JournalLine.credit","JournalLine.debit"];
+		var result = await engine.query(conn, semantic, columns);
+		chai.expect(result).to.eqls([
+			{"id":1,"_array":[{"credit":100,"debit":100,"id":1}]},
+			{"id":2,"_array":[{"credit":200,"debit":200,"id":2}]}
+		]);
+	});
+    it("sum 2", async () => {
+		var columns = ["JournalLine.credit","JournalLine.debit"];
+		var result = await engine.query(conn, semantic, columns);
+		chai.expect(result).to.eqls([ 
+			{ credit: 300, debit: 300 } 
+		]);
+    });	
 });

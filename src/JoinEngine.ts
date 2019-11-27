@@ -13,7 +13,18 @@ export class JoinEngine {
 	}
 	private join(dataLeft:object[], dataRight:object[], tableAliasLeft:string, tableAliasRight:string, foundation:Foundation):object[] {
 		var join:Join = FoundationUtil.getJoin(foundation, tableAliasLeft, tableAliasRight);
-		var leftIndex = 0;
+
+		for(var leftIndex = 0;leftIndex<dataLeft.length;leftIndex++) {
+			for(var rightIndex = 0;rightIndex<dataRight.length;rightIndex++) {
+				if (this.isJoined(dataLeft[leftIndex], dataRight[rightIndex], join)){
+					if((dataLeft[leftIndex] as any)["_array"] ===undefined ) {
+						(dataLeft[leftIndex] as any)["_array"] = [];
+					}
+					(dataLeft[leftIndex] as any)["_array"].push(dataRight[rightIndex]);
+				}
+			}
+		}
+		/*var leftIndex = 0;
 		var rightIndex = 0;
 		for(;;) {
 			if (this.isJoined(dataLeft[leftIndex], dataRight[rightIndex], join)) {				
@@ -32,7 +43,7 @@ export class JoinEngine {
 			if(rightIndex>=dataRight.length) {
 				break;
 			}
-		}
+		}*/
 		return dataLeft;
 	}
 	private isJoined(left: object, right: object, join: Join):boolean {
